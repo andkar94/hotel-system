@@ -1,0 +1,93 @@
+*{
+	margin: 0;
+}
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	background-color: #252826;
+	color: black;
+}
+.head-panel{
+	display: flex;
+	border-bottom: solid 1px #616161;
+	justify-content: space-between;
+}
+.logo{
+	display: flex;
+}
+.logo .element{
+	font-size: 28px;
+}
+.user-info{
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.element{
+	margin: 5px;
+	padding: 12px;
+	font-size: 18px;
+}
+a{
+	text-decoration: none;
+}
+a:link{
+	color: white;
+}
+a:visited{
+	color: white;
+}
+#logout a:hover{
+	text-decoration: underline; 
+}
+.app-body{
+	max-width:650px;
+	margin:40px auto;
+}
+.app-body h1{
+	text-align:center;
+	margin: 20px;
+}
+.app-body form{
+	display:flex;
+	flex-direction:column;
+	gap:1rem;
+}
+.app-body input[type=file]{
+	border:1px solid #ccc;
+	padding:6px;
+}
+.app-body input[type=submit]{
+	border:none;
+	padding:6px;
+	margin-top: 20px;
+	width: 150px;
+	cursor: pointer;
+}
+.app-body .msg{
+	color:red;
+}
+.app-body a.button{
+	display:inline-block;
+	color: white;
+	margin-top:1rem;
+	padding:.5rem 1rem;
+	border:1px solid #0b79ff;
+	text-decoration:none;
+	border-radius:4px;
+}
+.app-body label.radio{
+	display:inline-flex;
+	align-items:center;
+	gap:.25rem;
+	margin-right:1rem;
+}
+.app-body pre{
+	white-space:pre-wrap;
+	background:#f4f4f4;
+	padding:1rem;
+	border-radius:4px;
+}
+.logout-btn{
+	border: none;
+	color: black;	
+}

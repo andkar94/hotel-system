@@ -1,0 +1,34 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Hotel management
+{% endblock %}
+
+{% block content %}
+  
+  <h1>Main Panel</h1>
+
+	{% if user.is_staff %}
+		<p> Reserved rooms - ?? </p>
+		<p> Free rooms - ?? </p>
+		<p> Today arrivals - ? </p>
+		<p> Today departures - ? </p>
+		<br><br>
+		<p> Current reservations </p>
+		<h3 style="color: green; border: 3px dotted black; width: 300px; padding: 50px;">Place for nice table</h3>	
+	{% endif %} 
+
+
+<h2>Quick Actions</p>
+  <ul>
+	<li><a href="/reservation">New reservation</a></li>
+	<li><a href="/availability">Check availability</a></li>
+	
+	{% if user.is_staff %}
+		<li><a href="/rooms">Manage/Show rooms</a></li>	
+		<li><a href="/report">Generate report</a></li>
+	{% endif %} 
+	
+  </ul>
+  
+{% endblock %}
