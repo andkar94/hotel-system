@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'members',
+    'bootstrap5',
 ]
 
 MIDDLEWARE = [
@@ -119,3 +120,5 @@ STATIC_URL = 'static/'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'  
 LOGOUT_REDIRECT_URL = '/'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

@@ -29,9 +29,9 @@ class Room(models.Model):
         SUITE = 'Suite'
 
   roomNumber = models.IntegerField(unique=True)
-  roomType = models.CharField(choices=RoomType.choices)
+  roomType = models.CharField(choices=RoomType.choices, max_length=16)
   price = models.IntegerField(null=True)
-  status = models.CharField(choices=RoomStatus.choices, default=RoomStatus.AVAILABLE)
+  status = models.CharField(choices=RoomStatus.choices, default=RoomStatus.AVAILABLE, max_length=16)
   
   def __str__(self):
     return f"{self.roomNumber}"

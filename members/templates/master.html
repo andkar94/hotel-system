@@ -1,34 +1,61 @@
-{% load static %}
-
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
-  <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'css/nav_style.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} HotelFlow {% endblock %}</title>
+    {% load static %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
-<body>
-    <div class="container">
-		<div class="head-panel">
-			<div class="logo">
-				<div class="element">
-					<a href="/">Hotel Reservation</a>
-				</div>
-			</div>		
-			<div class="user-info">
-				<div class="element">
-					Logged as: {{ user.username }}
-				</div>		
-				<div class="element" id="logout">
-					<form method="post" action="{% url 'logout' %}">
-						{% csrf_token %}
-						<button class="logout-btn" type="submit">Logout</button>
-					</form>
-				</div>
-			</div>	
-		</div>				
-	</div>
-	<main>	
-        {% block content %}{% endblock %}		
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-sm py-2" style="background-color: #3b5998;">
+        <div class="container-fluid px-4">
+            
+            <a class="navbar-brand d-flex align-items-center fw-bold fs-4" href="/"
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-grid-fill me-2" viewBox="0 0 16 16">
+                    <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"/>
+                </svg>
+                {% block page_name %} Hotel Management System - Main Panel {% endblock %}
+            </a>
+
+            <div class="d-flex align-items-center ms-auto">               
+                <div class="text-white-50 px-2 d-none d-sm-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-display" viewBox="0 0 16 16">
+                        <path d="M0 4s0-2 2-2h12s2 0 2 2v6s0 2-2 2h-4c0 .667.083 1.167.25 1.5H11a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1h.75c.167-.333.25-.833.25-1.5H2s-2 0-2-2V4zm1.333 3.5V11c0 .369.148.708.387.958C2.112 12.35 2.67 12.5 3.333 12.5h9.334c.666 0 1.222-.15 1.613-.542.239-.25.387-.589.387-.958V7.5H1.333z"/>
+                    </svg>
+                </div>
+
+                <div class="text-white-50 px-2 d-none d-sm-block">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-bell" viewBox="0 0 16 16">
+                        <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                    </svg>
+                </div>
+                <div class="nav-item dropdown ms-3">
+                    <a class="nav-link dropdown-toggle text-white d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="me-1">{{ user.username }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown">
+                        <li>
+                            <form action="{% url 'logout' %}" method="post" class="px-0 py-0">
+                                {% csrf_token %}
+                                <button type="submit" class="dropdown-item text-danger py-2">
+                                    Logout
+                                </button>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <main class="container-fluid p-4">
+        {% block content %}{% endblock %}
     </main>
+
 </body>
 </html>

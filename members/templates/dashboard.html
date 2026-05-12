@@ -1,34 +1,145 @@
-{% extends "master.html" %}
-
-{% block title %}
-  Hotel management
-{% endblock %}
+{% extends 'master.html' %}
 
 {% block content %}
-  
-  <h1>Main Panel</h1>
+<div class="container-fluid">
+ {% if user.is_staff %}   
+	<div class="row g-3 mb-4 text-white">
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm p-3 h-100" style="background-color: #5d67b1;">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="mb-1 fw-bold">Reserved Rooms</p>
+                        <h2 class="display-5 fw-bold mb-0">{{ total_reserv }}</h2>
+                    </div>
+                    <div class="align-self-end opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-	{% if user.is_staff %}
-		<p> Reserved rooms - ?? </p>
-		<p> Free rooms - ?? </p>
-		<p> Today arrivals - ? </p>
-		<p> Today departures - ? </p>
-		<br><br>
-		<p> Current reservations </p>
-		<h3 style="color: green; border: 3px dotted black; width: 300px; padding: 50px;">Place for nice table</h3>	
-	{% endif %} 
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm p-3 h-100" style="background-color: #5eb461;">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="mb-1 fw-bold">Free Rooms</p>
+                        <h2 class="display-5 fw-bold mb-0">{{ free_rooms }}</h2>
+                    </div>
+                    <div class="align-self-end opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+							<path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0"/>
+						</svg>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm p-3 h-100" style="background-color: #e55347;">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="mb-1 fw-bold">Today's Arrivals </p>
+                        <h2 class="display-5 fw-bold mb-0">{{ arrivals }}</h2>
+                    </div>
+                    <div class="align-self-end opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3zm2 2v2h4V5H3zm5 0v2h5V5H8zm5 3H8v2h5V8zM3 8v2h4V8H3z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<h2>Quick Actions</p>
-  <ul>
-	<li><a href="/reservation">New reservation</a></li>
-	<li><a href="/availability">Check availability</a></li>
-	
-	{% if user.is_staff %}
-		<li><a href="/rooms">Manage/Show rooms</a></li>	
-		<li><a href="/report">Generate report</a></li>
-	{% endif %} 
-	
-  </ul>
-  
+        <div class="col-12 col-sm-6 col-xl-3">
+            <div class="card border-0 shadow-sm p-3 h-100" style="background-color: #f59e31;">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <p class="mb-1 fw-bold">Today's Departures</p>
+                        <h2 class="display-5 fw-bold mb-0">{{ departures }}</h2>
+                    </div>
+                    <div class="align-self-end opacity-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M4.5 3a.5.5 0 0 0-.5.5V4H1.5A1.5 1.5 0 0 0 0 5.5v9A1.5 1.5 0 0 0 1.5 16h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 4H12v-.5a.5.5 0 0 0-.5-.5h-7zM4 10h8v1H4v-1z"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+		<div class="col-lg-8">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white py-3 border-bottom-0">
+                    <h5 class="mb-0 fw-bold">Current Resevations</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle mb-0 text-secondary">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th class="ps-4">Guest</th>
+                                    <th>Room</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                </tr>
+                            </thead>
+                            <tbody>                              
+								{% for r in reservations %}										
+									<tr>
+										<td class="ps-4">{{ r.guest }}</td>
+										<td>{{ r.room }}</td>
+										<td>{{ r.checkInDate }}</td>
+										<td>{{ r.checkOutDate }}</td>
+									</tr>
+								{% endfor %}	
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+ {% endif %}
+
+        <!-- Quick Actions -->
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0 h-100">
+                <div class="card-header bg-white py-3 border-bottom-0">
+                    <h5 class="mb-0 fw-bold">Quick Actions</h5>
+                </div>
+                <div class="card-body d-grid gap-3">
+                    <a href="/reservation" class="btn btn-primary d-flex align-items-center py-3 fs-5 border-0 shadow-sm" style="background-color: #3b5998;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="me-3 ms-2" viewBox="0 0 16 16">
+                            <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
+                        </svg>
+                        New Reservation
+                    </a>
+					<a href="/availability" class="btn btn-primary d-flex align-items-center py-3 fs-5 border-0 shadow-sm" style="background-color: #3b5998;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="me-3 ms-2" viewBox="0 0 16 16">
+						  <path d="M10 .5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5.5.5 0 0 1-.5.5.5.5 0 0 0-.5.5V2a.5.5 0 0 0 .5.5h5A.5.5 0 0 0 11 2v-.5a.5.5 0 0 0-.5-.5.5.5 0 0 1-.5-.5"/>
+						  <path d="M4.085 1H3.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1h-.585q.084.236.085.5V2a1.5 1.5 0 0 1-1.5 1.5h-5A1.5 1.5 0 0 1 4 2v-.5q.001-.264.085-.5m6.769 6.854-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708.708"/>
+						</svg>
+                        Check Availability
+                    </a>
+                    {% if user.is_staff %}
+						<a href="/rooms" class="btn btn-primary d-flex align-items-center py-3 fs-5 border-0 shadow-sm" style="background-color: #3b5998;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="me-3 ms-2" viewBox="0 0 16 16">
+								<path d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm2-1a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+							</svg>
+							Manage Rooms
+						</a>
+						<a href="/report" class="btn btn-primary d-flex align-items-center py-3 fs-5 border-0 shadow-sm" style="background-color: #3b5998;">
+							<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="me-3 ms-2" viewBox="0 0 16 16">
+								<path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0v-1zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0V7zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0V9z"/>
+							</svg>
+							Reports
+						</a>
+					{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

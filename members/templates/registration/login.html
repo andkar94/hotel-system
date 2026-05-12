@@ -1,30 +1,60 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log-in to the system</title>
-	<link rel="stylesheet" href="{% static 'css\login\style.css' %}">
+    {% load static %}
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}	
 </head>
-<body>  
-   <div class="logging">
-	<div class="tittle">
-     <h1>
-    HotelFlow System 
-   </h1>
-   </div>
-	<form action="{% url 'login' %}" method="post">
-	    {% csrf_token %}
+<body class="vh-100 m-0 d-flex justify-content-center align-items-center" 
+      style="background: url('{% static 'hotel_picture.png' %}') center/cover no-repeat;">  
 
-		{% if form.errors %}
-		  <p style="color: red;">Invalid login or password.</p>
-		{% endif %}
-		
-		<input type="text" name="username" class="field" placeholder="Login" autofocus required>
-		<input type="password" name="password" class="field" placeholder="Password" required>
-		<input type="submit" value="LOG-IN">
-	</form>
-   </div>  
+    <div class="card shadow-lg border-0 rounded-3 w-100 mx-3" style="max-width: 480px;">
+        
+        <div class="card-header bg-white py-3 border-bottom text-center">
+            <span class="text-primary fw-semibold fs-5">
+                HotelFlow System 
+            </span>
+        </div>
+
+        <div class="card-body p-4 p-sm-5">
+            <h2 class="text-center fw-bold mb-4 mt-2 text-dark">Sign in</h2>
+
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+
+                {% if form.errors %}
+                    <div class="alert alert-danger py-2" role="alert">
+                        Invalid login or password.
+                    </div>
+                {% endif %}
+                
+                <div class="input-group mb-3">
+                    <span class="input-group-text bg-white text-secondary border-end-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+                    </span>
+                    <input type="text" name="username" class="form-control border-start-0 ps-0" placeholder="Login" autofocus required>
+                </div>
+
+                <div class="input-group mb-4">
+                    <span class="input-group-text bg-white text-secondary border-end-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/></svg>
+                    </span>
+                    <input type="password" name="password" class="form-control border-start-0 ps-0" placeholder="Password" required>
+                </div>
+
+                <div class="d-grid mb-3">
+                    <input type="submit" class="btn btn-primary btn-lg fs-5 shadow-sm" value="LOG-IN">
+                </div>
+
+                <div class="text-center">
+                    <a href="#" class="text-decoration-none text-primary small fw-medium">Forgot password?</a>
+                </div>
+            </form>
+        </div>
+    </div>  
 </body>
 </html>
