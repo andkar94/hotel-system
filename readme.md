@@ -4,16 +4,16 @@
 3. Zainstaluj zależności (pip install -r requirements.txt)
 
 Start serwera -> 
-'''
+```
 python manage.py runserver
-'''
+```
 
 ### Migracje po zmianach w bazie danych:
 
-'''
+```
 python manage.py makemigrations members
-'''
+```
 
-'''
+```
 python manage.py migrate
-'''
+```
