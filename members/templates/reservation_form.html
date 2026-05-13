@@ -4,6 +4,71 @@
 {% block page_name %} Hotel Management System - Make Reservation {% endblock %}
 
 {% block content %}
-  <h1>Make reservation {{ user.username }}!!!</h1>
-  <br><br><h3 style="color: green; border: 3px dotted black; width: 300px; padding: 50px;">Place for reservation module</h3> 
+<div class="container py-4">
+    <div class="card shadow-sm border-0 mx-auto" style="max-width: 900px;">
+        <div class="card-body p-4 p-md-5">
+            
+            <form action="{% url 'addReservation' %}" method="post">
+                {% csrf_token %}
+
+                <div class="row align-items-center py-3 border-bottom border-light">
+                    <label class="col-sm-3 fw-bold fs-5 text-secondary">Guest:</label>
+                    <div class="col-sm-9">
+                        <select class="form-select form-select-lg border-secondary-subtle bg-light-subtle" name="guest_id">
+                            {% for guest in guests %}							
+								<option value="{{ guest.id }}">{{ guest.name }}</option>
+							{% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row align-items-center py-3 border-bottom border-light">
+                    <label class="col-sm-3 fw-bold fs-5 text-secondary">Room:</label>
+                    <div class="col-sm-9">
+                        <select class="form-select form-select-lg border-secondary-subtle bg-light-subtle" name="room_id">
+                            {% for room in rooms %}							
+								<option value="{{ room.id }}">{{ room.roomNumber }}: 🛏️ {{ room.roomType }}: {{ room.price }} PLN per night</option>
+							{% endfor %}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row align-items-center py-3 border-bottom border-light">
+                    <label class="col-sm-3 fw-bold fs-5 text-secondary">Start date:</label>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="input-group input-group-lg">
+                            <input type="date" class="form-control border-secondary-subtle bg-light-subtle" name="startDate" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row align-items-center py-3 border-bottom border-light">
+                    <label class="col-sm-3 fw-bold fs-5 text-secondary">End date:</label>
+                    <div class="col-sm-6 col-md-4">
+                        <div class="input-group input-group-lg">
+                            <input type="date" class="form-control border-secondary-subtle bg-light-subtle" name="endDate" required>
+                        </div>
+                    </div>
+                </div>				
+
+                <div class="d-flex justify-content-center gap-3 mt-4">
+                    <button type="submit" class="btn btn-success btn-lg px-4 py-2 d-flex align-items-center shadow-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-check-circle-fill me-2" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        </svg>
+                        Make Reservation
+                    </button>
+
+                    <a href="/" class="btn btn-danger btn-lg px-4 py-2 d-flex align-items-center shadow-sm">
+						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-x-circle-fill me-2" viewBox="0 0 16 16">
+							<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+						</svg>
+						Cancel
+					</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}
